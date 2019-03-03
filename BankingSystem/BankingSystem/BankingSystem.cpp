@@ -1,10 +1,10 @@
-#include "dec_fun.h"
+#include "dec.h"
 
 int main()
 {
 	int comm = 0;
 
-	while(1){
+	while (1) {
 		ShowMenu();
 		std::cin >> comm; //ask question
 		switch (comm) {
