@@ -1,4 +1,4 @@
-#include "dec_fun.h"//함수 또는 변수정의
+#include "dec.h"//함수 또는 변수정의
 
 int numberOfguest = -1;
 guest_info guest[100];
@@ -24,7 +24,7 @@ void DepositAccount()
 	//계좌를 찾고 넣자
 	for (int i = 0; i <= numberOfguest; i++)
 	{
-		if(guest[i].number == temp_number)
+		if (guest[i].number == temp_number)
 		{
 			guest[i].left += temp_money;
 			break;
@@ -56,7 +56,7 @@ void Display()
 {
 	for (int i = 0; i <= numberOfguest; i++)
 	{
-		std::cout << "이름 :"<< guest[i].name << std::endl;
+		std::cout << "이름 :" << guest[i].name << std::endl;
 		std::cout << "계좌 번호 :" << guest[i].number << std::endl;
 		std::cout << "잔액 :" << guest[i].left << std::endl;
 		std::cout << std::endl;
