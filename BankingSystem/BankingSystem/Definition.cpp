@@ -1,18 +1,47 @@
 #include "dec.h"//함수 또는 변수정의
 
-int numberOfguest = -1;
-guest_info guest[100];
-void CreateAccount() {
-	numberOfguest++;
-	std::cout << "Enter your account number." << std::endl;
-	std::cin >> guest[numberOfguest].number;
-
-	std::cout << "Enter your account name." << std::endl;
-	std::cin >> guest[numberOfguest].name;
-
-	guest[numberOfguest].left = 0;
+void Account::CreateAccount(int number, char* name)
+{
+	strcpy(this->name, name);
+	this->number = number;
 }
-void DepositAccount()
+int Account::GetAccountNumber()
+{
+	return this->number;
+}
+char* Account::GetAccountName()
+{
+	return this->name;
+}
+double Account::GetAccountBanlance() {
+	return this->left;
+}
+bool Account::DepositAccount(int money) {
+	if (money < 0) {
+		return false;
+	}else {
+		this->left=+money;
+	}
+}
+bool Account::WithdrawAccount(int money) {
+	if (money < 0) {
+		return false;
+	}
+	else {
+		this->left=-money;
+	}
+}
+void BankingSystem::CreateAccount() {
+	int number;
+	char name[20];
+	numberOfAccount++;
+	std::cout << "Enter your account number." << std::endl;
+	std::cin >> number;
+	std::cout << "Enter your account name." << std::endl;
+	std::cin >> name;
+	account[numberOfAccount].CreateAccount(number, name);
+}
+void BankingSystem::DepositAccount()
 {
 	int temp_number;
 	double temp_money;
@@ -22,18 +51,20 @@ void DepositAccount()
 	std::cout << "입금 액 :" << std::endl;
 	std::cin >> temp_money;
 	//계좌를 찾고 넣자
-	for (int i = 0; i <= numberOfguest; i++)
+	for (int i = 0; i <= numberOfAccount; i++)
 	{
-		if (guest[i].number == temp_number)
+		if (account[i].GetAccountNumber() == temp_number)
 		{
-			guest[i].left += temp_money;
-			break;
+			if(account[i].DepositAccount(temp_money))
+				break;
+			else {
+				std::cout << "error <deposit>" << std::endl;
+			}
 		}
 	}
-	guest[temp_number].left += temp_money;
 	std::cout << "입금 완료" << std::endl;
 }
-void WithdrawMoney()
+void BankingSystem::WithdrawMoney()
 {
 	int temp_number;
 	double temp_money;
@@ -42,27 +73,30 @@ void WithdrawMoney()
 	std::cin >> temp_number;
 	std::cout << "출금 액 :" << std::endl;
 	std::cin >> temp_money;
-	for (int i = 0; i <= numberOfguest; i++)
+	for (int i = 0; i <= numberOfAccount; i++)
 	{
-		if (guest[i].number == temp_number)
+		if (account[i].GetAccountNumber() == temp_number)
 		{
-			guest[i].left -= temp_money;
-			break;
+			if (account[i].WithdrawAccount(temp_money))
+				break;
+			else {
+				std::cout << "error <withdraw>" << std::endl;
+			}
 		}
 	}
 	std::cout << "출금 완료" << std::endl;
 }
-void Display()
+void BankingSystem::Display() 
 {
-	for (int i = 0; i <= numberOfguest; i++)
+	for (int i = 0; i <= numberOfAccount; i++)
 	{
-		std::cout << "이름 :" << guest[i].name << std::endl;
-		std::cout << "계좌 번호 :" << guest[i].number << std::endl;
-		std::cout << "잔액 :" << guest[i].left << std::endl;
+		std::cout << "이름 :" << account[i].GetAccountName() << std::endl;
+		std::cout << "계좌 번호 :" << account[i].GetAccountNumber() << std::endl;
+		std::cout << "잔액 :" << account[i].GetAccountBanlance()<< std::endl;
 		std::cout << std::endl;
 	}
 }
-void ShowMenu()
+void BankingSystem::ShowMenu()
 {
 	std::cout << "-----MENU-----" << std::endl;
 	std::cout << "1. 계좌개설" << std::endl;
