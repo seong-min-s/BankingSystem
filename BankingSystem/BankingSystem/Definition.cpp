@@ -1,16 +1,33 @@
 #include "dec.h"//함수 또는 변수정의
 
 int numberOfguest = -1;
-guest_info guest[100];
+Account account[100];
+bool Account::InitAccount(int number, char *name, double balance) {
+	if (number < 0) {
+		return false;
+	}else {
+		this->number = number;
+	}
+	if (balance < 0) {
+		return false;
+	}else {
+		this->balance = balance;
+	}
+	return true;
+}
 void CreateAccount() {
 	numberOfguest++;
+	int number, balance;
+	char *name;
 	std::cout << "Enter your account number." << std::endl;
-	std::cin >> guest[numberOfguest].number;
+	std::cin >>number;
 
 	std::cout << "Enter your account name." << std::endl;
-	std::cin >> guest[numberOfguest].name;
+	std::cin >>name;
 
-	guest[numberOfguest].left = 0;
+	std::cout << "Enter your account name." << std::endl;
+	std::cin >> balance;
+	account[numberOfguest].InitAccount(number, name, balance);
 }
 void DepositAccount()
 {
@@ -24,13 +41,13 @@ void DepositAccount()
 	//계좌를 찾고 넣자
 	for (int i = 0; i <= numberOfguest; i++)
 	{
-		if (guest[i].number == temp_number)
+		if (account[i].number == temp_number)
 		{
-			guest[i].left += temp_money;
+			account[i].left += temp_money;
 			break;
 		}
 	}
-	guest[temp_number].left += temp_money;
+	account[temp_number].balance += temp_money;
 	std::cout << "입금 완료" << std::endl;
 }
 void WithdrawMoney()
@@ -44,9 +61,9 @@ void WithdrawMoney()
 	std::cin >> temp_money;
 	for (int i = 0; i <= numberOfguest; i++)
 	{
-		if (guest[i].number == temp_number)
+		if (account[i].number == temp_number)
 		{
-			guest[i].left -= temp_money;
+			account[i].left -= temp_money;
 			break;
 		}
 	}
@@ -56,8 +73,8 @@ void Display()
 {
 	for (int i = 0; i <= numberOfguest; i++)
 	{
-		std::cout << "이름 :" << guest[i].name << std::endl;
-		std::cout << "계좌 번호 :" << guest[i].number << std::endl;
+		std::cout << "이름 :" << account[i].name << std::endl;
+		std::cout << "계좌 번호 :" << account[i].number << std::endl;
 		std::cout << "잔액 :" << guest[i].left << std::endl;
 		std::cout << std::endl;
 	}
