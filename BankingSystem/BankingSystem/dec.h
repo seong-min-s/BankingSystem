@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
-enum { CREATE = 1, DEPOSIT, WITHDRAW, DISPLAY, INQUIRE, EXIT };
+enum { CREATE = 1, DEPOSIT, WITHDRAW, DISPLAY, EXIT };
+const int LEN_NAME = 20;
 class Account {
 private:
 	int number;
@@ -19,8 +20,9 @@ public :
 	char* GetName();
 	double GetBalance();
 };
-void CreateAccount();
-void DepositAccount();
-void WithdrawMoney();
-void Display();
-void ShowMenu();
+void ShowMenu();      //메뉴 출력
+void CreateAccount(); //계좌 개설
+void DepositAccount();//입     금
+void WithdrawMoney(); //출     금
+void Display();		  //잔액 조회
+

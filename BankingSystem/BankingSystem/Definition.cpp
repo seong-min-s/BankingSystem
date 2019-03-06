@@ -18,14 +18,14 @@ bool Account::InitAccount(int number, char *name, double balance) {
 void CreateAccount() {
 	numberOfguest++;
 	int number, balance;
-	const char *name = "HELLO";//巩力惯积
+	char name[LEN_NAME];//巩力惯积
 	std::cout << "Enter your account number." << std::endl;
 	std::cin >>number;
 
 	std::cout << "Enter your account name." << std::endl;
 	std::cin >>name;
 
-	std::cout << "Enter your account name." << std::endl;
+	std::cout << "Enter your account BALANCE." << std::endl;
 	std::cin >> balance;
 	account[numberOfguest].InitAccount(number, name, balance);
 }
