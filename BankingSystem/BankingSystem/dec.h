@@ -14,6 +14,10 @@ public :
 		delete[]name;
 	}
 	bool InitAccount(int number, char *name, double balance);
+	bool SetBalance(int COMMAND, double amount);
+	int GetNumber();
+	char* GetName();
+	double GetBalance();
 };
 void CreateAccount();
 void DepositAccount();

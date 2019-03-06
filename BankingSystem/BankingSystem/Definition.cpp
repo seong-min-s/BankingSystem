@@ -18,7 +18,7 @@ bool Account::InitAccount(int number, char *name, double balance) {
 void CreateAccount() {
 	numberOfguest++;
 	int number, balance;
-	char *name;
+	const char *name = "HELLO";//문제발생
 	std::cout << "Enter your account number." << std::endl;
 	std::cin >>number;
 
@@ -28,6 +28,32 @@ void CreateAccount() {
 	std::cout << "Enter your account name." << std::endl;
 	std::cin >> balance;
 	account[numberOfguest].InitAccount(number, name, balance);
+}
+bool Account::SetBalance(int COMMAND, double amount)
+{
+	if (amount < 0) {
+		return false;
+	}
+	if (COMMAND == DEPOSIT)
+	{
+		this->balance += amount;
+	}
+	else if (COMMAND == WITHDRAW) {
+		this->balance -= amount;
+	}
+	return true;
+}
+int Account::GetNumber()
+{
+	return this->number;
+}
+char* Account::GetName()
+{
+	return this->name;
+}
+double Account::GetBalance()
+{
+	return this->balance;
 }
 void DepositAccount()
 {
@@ -41,14 +67,13 @@ void DepositAccount()
 	//계좌를 찾고 넣자
 	for (int i = 0; i <= numberOfguest; i++)
 	{
-		if (account[i].number == temp_number)
+		if (account[i].GetNumber()== temp_number)
 		{
-			account[i].left += temp_money;
+			account[i].SetBalance(DEPOSIT, temp_money);
+			std::cout << "입금 완료" << std::endl;
 			break;
 		}
 	}
-	account[temp_number].balance += temp_money;
-	std::cout << "입금 완료" << std::endl;
 }
 void WithdrawMoney()
 {
@@ -61,21 +86,21 @@ void WithdrawMoney()
 	std::cin >> temp_money;
 	for (int i = 0; i <= numberOfguest; i++)
 	{
-		if (account[i].number == temp_number)
+		if (account[i].GetNumber() == temp_number)
 		{
-			account[i].left -= temp_money;
+			account[i].SetBalance(WITHDRAW, temp_money);
+			std::cout << "출금 완료" << std::endl;
 			break;
 		}
 	}
-	std::cout << "출금 완료" << std::endl;
 }
 void Display()
 {
 	for (int i = 0; i <= numberOfguest; i++)
 	{
-		std::cout << "이름 :" << account[i].name << std::endl;
-		std::cout << "계좌 번호 :" << account[i].number << std::endl;
-		std::cout << "잔액 :" << guest[i].left << std::endl;
+		std::cout << "이름 :" << account[i].GetName() << std::endl;
+		std::cout << "계좌 번호 :" << account[i].GetNumber() << std::endl;
+		std::cout << "잔액 :" << account[i].GetBalance() << std::endl;
 		std::cout << std::endl;
 	}
 }
