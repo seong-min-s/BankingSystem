@@ -1,28 +1,28 @@
 #include "dec.h"
-
+using namespace COMMAND_CONSIST;
 int main()
 {
 	int comm = 0;
-
+	BankingSystem *bs = new BankingSystem;
 	while (1) {
-		ShowMenu();
+		bs->ShowMenu();
 		std::cin >> comm; //ask question
 		switch (comm) {
 		case CREATE:
 			//Create Account
-			CreateAccount();
+			bs->CreateAccount();
 			break;
 		case DEPOSIT:
 			//Save Money
-			DepositAccount();
+			bs->DepositAccount();
 			break;
 		case WITHDRAW:
 			//Withdraw Money
-			WithdrawMoney();
+			bs->WithdrawMoney();
 			break;
 		case DISPLAY:
 			//Display All accounts
-			Display();
+			bs->Display();
 			break;
 		case EXIT:
 			return 0;
