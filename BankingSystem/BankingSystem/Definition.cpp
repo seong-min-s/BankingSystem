@@ -17,19 +17,19 @@ bool Account::SetBalance(int COMMAND, double amount)
 	}
 	return true;
 }
-int Account::GetNumber()
+int Account::GetNumber() const
 {
-	return this->accID;
+	return accID;
 }
-char* Account::GetName()//이름을 얻는 과정에서 오류발생
+char* Account::GetName() const//이름을 얻는 과정에서 오류발생
 {
 	return this->cusName;
 }
-double Account::GetBalance()
+double Account::GetBalance()const
 {
 	return this->balance;
 }
-void Account::ShowAllInfo()
+void Account::ShowAllInfo() const
 {
 	std::cout << "이    름 : " << this->cusName << std::endl;
 	std::cout << "계좌번호 : " << this->accID << std::endl;

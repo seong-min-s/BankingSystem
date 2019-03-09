@@ -21,10 +21,10 @@ public :
 		delete[]cusName;
 	}
 	bool SetBalance(int COMMAND, double amount);
-	int GetNumber();
-	char* GetName();
-	double GetBalance();
-	void ShowAllInfo();
+	int GetNumber()const;
+	char* GetName()const;
+	double GetBalance()const;
+	void ShowAllInfo()const;
 };
 void ShowMenu();      //메뉴 출력
 void CreateAccount(); //계좌 개설
