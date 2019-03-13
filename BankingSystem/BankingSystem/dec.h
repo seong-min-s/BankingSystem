@@ -26,9 +26,17 @@ public :
 	double GetBalance()const;
 	void ShowAllInfo()const;
 };
-void ShowMenu();      //메뉴 출력
-void CreateAccount(); //계좌 개설
-void DepositAccount();//입     금
-void WithdrawMoney(); //출     금
-void Display();		  //잔액 조회
+class AccountHandler {
+public:
+	const static int LEN_NAME = 20;
+	static int numberOfguest;
+	Account *account[100];
+public:
+
+	static void ShowMenu();      //메뉴 출력
+	static void CreateAccount(); //계좌 개설
+	static void DepositAccount();//입     금
+	static void WithdrawMoney(); //출     금
+	static void Display();		  //잔액 조회
+};
 

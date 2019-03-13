@@ -1,7 +1,7 @@
 #include "dec.h"//함수 또는 변수정의
 
-int numberOfguest = -1;
-Account *account[100];
+
+int AccountHandler::numberOfguest = 0;
 
 bool Account::SetBalance(int COMMAND, double amount)
 {
@@ -31,11 +31,11 @@ double Account::GetBalance()const
 }
 void Account::ShowAllInfo() const
 {
-	std::cout << "이    름 : " << this->cusName << std::endl;
-	std::cout << "계좌번호 : " << this->accID << std::endl;
-	std::cout << "잔    액 : " << this->balance << std::endl;
+	std::cout << "이    름 : " << cusName << std::endl;
+	std::cout << "계좌번호 : " << accID << std::endl;
+	std::cout << "잔    액 : " << balance << std::endl;
 }
-void DepositAccount()
+void AccountHandler::DepositAccount()
 {
 	int temp_number;
 	double temp_money;
@@ -55,7 +55,7 @@ void DepositAccount()
 		}
 	}
 }
-void WithdrawMoney()
+void AccountHandler::WithdrawMoney()
 {
 	int temp_number;
 	double temp_money;
@@ -74,7 +74,7 @@ void WithdrawMoney()
 		}
 	}
 }
-void Display()
+void AccountHandler::Display()
 {
 	for (int i = 0; i <= numberOfguest; i++)
 	{
@@ -82,9 +82,9 @@ void Display()
 		std::cout << std::endl;
 	}
 }
-void CreateAccount() {
+void AccountHandler::CreateAccount() {
 	int number, balance;
-	char name[LEN_NAME];//문제발생
+	char name[LEN_NAME];
 	numberOfguest++;
 	std::cout << "Enter your account number." << std::endl;
 	std::cin >> number;
@@ -97,7 +97,7 @@ void CreateAccount() {
 	account[numberOfguest] = new Account(number, name, balance);
 	//account[numberOfguest].InitAccount(number, name, balance);
 }
-void ShowMenu()
+void AccountHandler::ShowMenu()
 {
 	std::cout << "-----MENU-----" << std::endl;
 	std::cout << "1. 계좌개설" << std::endl;
@@ -106,11 +106,3 @@ void ShowMenu()
 	std::cout << "4. 계좌정보 전체 출력" << std::endl;
 	std::cout << "5. 프로그램 종료" << std::endl;
 }
-/*
-고객 계좌정보 구조체 정보
-typedef struct guest_info{
-	int number;
-	char name[20];
-	int left;
-}guest_info;
-*/

@@ -2,25 +2,26 @@
 int main()
 {
 	int comm = 0;
+	AccountHandler handler;
 	while (1) {
-		ShowMenu();
+		handler.ShowMenu();
 		std::cin >> comm; //ask question
 		switch (comm) {
 		case CREATE:
 			//Create Account
-			CreateAccount();
+			handler.CreateAccount();
 			break;
 		case DEPOSIT:
 			//Save Money
-			DepositAccount();
+			handler.DepositAccount();
 			break;
 		case WITHDRAW:
 			//Withdraw Money
-			WithdrawMoney();
+			handler.WithdrawMoney();
 			break;
 		case DISPLAY:
 			//Display All accounts
-			Display();
+			handler.Display();
 			break;
 		case EXIT:
 			return 0;
