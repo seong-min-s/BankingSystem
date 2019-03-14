@@ -1,6 +1,6 @@
 #include "dec.h"//함수 또는 변수정의
 
-int AccountHandler::numberOfguest = 0;
+int AccountHandler::numberOfguest = -1;
 
 bool Account::SetBalance(int COMMAND, double amount)
 {
@@ -95,7 +95,6 @@ void AccountHandler::CreateAccount() {
 	std::cout << "Enter your account BALANCE." << std::endl;
 	std::cin >> balance;
 	account[numberOfguest] = new Account(number, name, balance);
-	//account[numberOfguest].InitAccount(number, name, balance);
 }
 void AccountHandler::ShowMenu()
 {
