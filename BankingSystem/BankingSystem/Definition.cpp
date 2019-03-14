@@ -1,6 +1,5 @@
 #include "dec.h"//함수 또는 변수정의
 
-
 int AccountHandler::numberOfguest = 0;
 
 bool Account::SetBalance(int COMMAND, double amount)
@@ -35,6 +34,7 @@ void Account::ShowAllInfo() const
 	std::cout << "계좌번호 : " << accID << std::endl;
 	std::cout << "잔    액 : " << balance << std::endl;
 }
+
 void AccountHandler::DepositAccount()
 {
 	int temp_number;

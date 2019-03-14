@@ -30,9 +30,8 @@ class AccountHandler {
 public:
 	const static int LEN_NAME = 20;
 	static int numberOfguest;
-	Account *account[100];
+	static Account *account[100];
 public:
-
 	static void ShowMenu();      //메뉴 출력
 	static void CreateAccount(); //계좌 개설
 	static void DepositAccount();//입     금
