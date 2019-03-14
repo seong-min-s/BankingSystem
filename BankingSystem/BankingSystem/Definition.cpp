@@ -1,7 +1,17 @@
 #include "dec.h"//함수 또는 변수정의
 
 int AccountHandler::numberOfguest = -1;
-
+Account::Account(int number, char *name, double money) : accID(number), balance(money) {
+	this->cusName = new char[strlen(name) + 1];//문제요구사항 : 멤버변수로 문자열 포인터를 지니고, 동적 할당의 형태로 구현해야 한다.
+	strcpy(this->cusName, name);
+}
+Account::Account(const Account &copy) :accID(copy.accID), balance(copy.balance) {
+	this->cusName = new char[strlen(copy.cusName) + 1];
+	strcpy(cusName, copy.cusName);
+}
+Account::~Account() {
+	delete[]cusName;
+}
 bool Account::SetBalance(int COMMAND, double amount)
 {
 	if (amount < 0) {
@@ -74,7 +84,7 @@ void AccountHandler::WithdrawMoney()
 		}
 	}
 }
-void AccountHandler::Display()
+void AccountHandler::Display() const
 {
 	for (int i = 0; i <= numberOfguest; i++)
 	{
@@ -96,7 +106,7 @@ void AccountHandler::CreateAccount() {
 	std::cin >> balance;
 	account[numberOfguest] = new Account(number, name, balance);
 }
-void AccountHandler::ShowMenu()
+void AccountHandler::ShowMenu() const
 {
 	std::cout << "-----MENU-----" << std::endl;
 	std::cout << "1. 계좌개설" << std::endl;
@@ -104,4 +114,9 @@ void AccountHandler::ShowMenu()
 	std::cout << "3. 출    금" << std::endl;
 	std::cout << "4. 계좌정보 전체 출력" << std::endl;
 	std::cout << "5. 프로그램 종료" << std::endl;
+}
+AccountHandler::~AccountHandler() {
+	for (int i = 0; i < AccountHandler::numberOfguest; i++) {
+		delete[i]account;
+	}
 }

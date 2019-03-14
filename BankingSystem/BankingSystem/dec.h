@@ -2,40 +2,40 @@
 #include <iostream>
 #include <cstring>
 enum { CREATE = 1, DEPOSIT, WITHDRAW, DISPLAY, EXIT };
-const int LEN_NAME = 20;
+/*
+	클래스 이름 : Account
+	클래스 유형 : Entity Class
+*/
 class Account {
 private:
 	int accID;
 	char *cusName;
 	double balance;
 public :
-	Account(int number, char *name, double money) : accID(number), balance(money){
-		this->cusName = new char[strlen(name)+1];//문제요구사항 : 멤버변수로 문자열 포인터를 지니고, 동적 할당의 형태로 구현해야 한다.
-		strcpy(this->cusName, name);
-	}
-	Account(const Account &copy) :accID(copy.accID),balance(copy.balance){
-		this->cusName = new char[strlen(copy.cusName)+1];
-		strcpy(cusName, copy.cusName);
-	}
-	~Account() {
-		delete[]cusName;
-	}
+	Account(int number, char *name, double money);
+	Account(const Account &copy);
+	~Account();
 	bool SetBalance(int COMMAND, double amount);
 	int GetNumber()const;
 	char* GetName()const;
 	double GetBalance()const;
 	void ShowAllInfo()const;
 };
+/*
+	클래스 이름 : AccountHandler
+	클래스 유형 : Control Class
+*/
 class AccountHandler {
 public:
 	const static int LEN_NAME = 20;
 	static int numberOfguest;
 	Account *account[100];
+	~AccountHandler();
 public:
-	void ShowMenu();      //메뉴 출력
+	void ShowMenu() const;      //메뉴 출력
 	void CreateAccount(); //계좌 개설
 	void DepositAccount();//입     금
 	void WithdrawMoney(); //출     금
-	void Display();		  //잔액 조회
+	void Display() const;		  //잔액 조회
 };
 
