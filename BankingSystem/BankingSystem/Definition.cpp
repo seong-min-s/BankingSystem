@@ -45,6 +45,12 @@ void Account::ShowAllInfo() const
 	std::cout << "ภÜ    พื : " << balance << std::endl;
 }
 
+NormalAccount::NormalAccount(int number, char *name, double money, float ratio) : Account(number, name, money), interest(ratio)
+{ }
+bool NormalAccount::SetBalance(int COMMAND, double amount) {
+
+}
+
 void AccountHandler::DepositAccount()
 {
 	int temp_number;

@@ -22,11 +22,18 @@ public :
 	Account(int number, char *name, double money);
 	Account(const Account &copy);
 	~Account();
-	bool SetBalance(int COMMAND, double amount);
+	virtual bool SetBalance(int COMMAND, double amount);
 	int GetNumber()const;
 	char* GetName()const;
 	double GetBalance()const;
 	void ShowAllInfo()const;
+};
+class NormalAccount : public Account {
+private:
+	float interest;
+public:
+	NormalAccount(int number, char *name, double money, float ratio);
+	virtual bool SetBalance(int COMMAND, double amount);
 };
 /*
 	클래스 이름 : AccountHandler
