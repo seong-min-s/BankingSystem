@@ -12,19 +12,28 @@ Account::Account(const Account &copy) :accID(copy.accID), balance(copy.balance) 
 Account::~Account() {
 	delete[]cusName;
 }
-bool Account::SetBalance(int COMMAND, double amount)
+
+bool Account::Deposit(double money)
 {
-	if (amount < 0) {
+	if (money < 0) {
+		std::cout << "Not Accurate Money" << std::endl;
 		return false;
 	}
-	if (COMMAND == DEPOSIT)
-	{
-		this->balance += amount;
+	else {
+		this->balance += money;
+		return true;
 	}
-	else if (COMMAND == WITHDRAW) {
-		this->balance -= amount;
+}
+bool Account::Withdraw(double money)
+{
+	if (money < 0) {
+		std::cout << "There's no money left in your Account" << std::endl;
+		return false;
 	}
-	return true;
+	else {
+		this->balance -= money;
+		return true;
+	}
 }
 int Account::GetNumber() const
 {
@@ -44,13 +53,6 @@ void Account::ShowAllInfo() const
 	std::cout << "계좌번호 : " << accID << std::endl;
 	std::cout << "잔    액 : " << balance << std::endl;
 }
-
-NormalAccount::NormalAccount(int number, char *name, double money, float ratio) : Account(number, name, money), interest(ratio)
-{ }
-bool NormalAccount::SetBalance(int COMMAND, double amount) {
-
-}
-
 void AccountHandler::DepositAccount()
 {
 	int temp_number;
@@ -65,7 +67,7 @@ void AccountHandler::DepositAccount()
 	{
 		if (account[i]->GetNumber()== temp_number)
 		{
-			account[i]->SetBalance(DEPOSIT, temp_money);
+			account[i]->Deposit(temp_money);
 			std::cout << "입금 완료" << std::endl;
 			break;
 		}
@@ -84,7 +86,7 @@ void AccountHandler::WithdrawMoney()
 	{
 		if (account[i]->GetNumber() == temp_number)
 		{
-			account[i]->SetBalance(WITHDRAW, temp_money);
+			account[i]->Withdraw(temp_money);
 			std::cout << "출금 완료" << std::endl;
 			break;
 		}

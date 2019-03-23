@@ -22,7 +22,9 @@ public :
 	Account(int number, char *name, double money);
 	Account(const Account &copy);
 	~Account();
-	virtual bool SetBalance(int COMMAND, double amount);
+	//virtual bool SetBalance(int COMMAND, double amount);
+	bool Deposit(double money);
+	bool Withdraw(double money);
 	int GetNumber()const;
 	char* GetName()const;
 	double GetBalance()const;
@@ -34,6 +36,7 @@ private:
 public:
 	NormalAccount(int number, char *name, double money, float ratio);
 	virtual bool SetBalance(int COMMAND, double amount);
+
 };
 /*
 	클래스 이름 : AccountHandler
