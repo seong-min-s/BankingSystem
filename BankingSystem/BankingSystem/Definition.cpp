@@ -53,6 +53,13 @@ void Account::ShowAllInfo() const
 	std::cout << "°èÁÂ¹øÈ£ : " << accID << std::endl;
 	std::cout << "ÀÜ    ¾× : " << balance << std::endl;
 }
+NormalAccount::NormalAccount(int number, char *name, double money, float ratio) : Account(number, name, money), interest(ratio)
+{ }
+
+bool NormalAccount::Deposit(double money)
+{
+	balance = (GetBalance() + money)*interest / 100;
+}
 void AccountHandler::DepositAccount()
 {
 	int temp_number;

@@ -23,7 +23,7 @@ public :
 	Account(const Account &copy);
 	~Account();
 	//virtual bool SetBalance(int COMMAND, double amount);
-	bool Deposit(double money);
+	virtual bool Deposit(double money);
 	bool Withdraw(double money);
 	int GetNumber()const;
 	char* GetName()const;
@@ -33,10 +33,10 @@ public :
 class NormalAccount : public Account {
 private:
 	float interest;
+
 public:
 	NormalAccount(int number, char *name, double money, float ratio);
-	virtual bool SetBalance(int COMMAND, double amount);
-
+	virtual bool Deposit(double amount);
 };
 /*
 	클래스 이름 : AccountHandler
