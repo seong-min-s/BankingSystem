@@ -2,6 +2,13 @@
 #include <iostream>
 #include <cstring>
 enum { CREATE = 1, DEPOSIT, WITHDRAW, DISPLAY, EXIT };
+namespace INTEREST_GRADE{
+	enum {
+		A = 107,
+		B = 104,
+		C = 102
+	};
+}
 /*
 	클래스 이름 : Account
 	클래스 유형 : Entity Class
