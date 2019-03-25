@@ -4,9 +4,9 @@
 enum { CREATE = 1, DEPOSIT, WITHDRAW, DISPLAY, EXIT };
 namespace INTEREST_GRADE{
 	enum {
-		A = 107,
-		B = 104,
-		C = 102
+		A = 7,
+		B = 4,
+		C = 2
 	};
 }
 /*
@@ -28,15 +28,16 @@ public :
 	int GetNumber()const;
 	char* GetName()const;
 	double GetBalance()const;
-	void ShowAllInfo()const;
+	virtual void ShowAllInfo()const;
 };
 class NormalAccount : public Account {
 private:
 	float interest;
-
 public:
 	NormalAccount(int number, char *name, double money, float ratio);
-	virtual bool Deposit(double amount);
+	bool Deposit(double amount);
+	int GetDepositInterest(int interest);
+	void ShowAllInfo()const;
 };
 /*
 	클래스 이름 : AccountHandler

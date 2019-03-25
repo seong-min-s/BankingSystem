@@ -53,12 +53,31 @@ void Account::ShowAllInfo() const
 	std::cout << "°èÁÂ¹øÈ£ : " << accID << std::endl;
 	std::cout << "ÀÜ    ¾× : " << balance << std::endl;
 }
+
 NormalAccount::NormalAccount(int number, char *name, double money, float ratio) : Account(number, name, money), interest(ratio)
 { }
 
 bool NormalAccount::Deposit(double money)
 {
-	balance = (GetBalance() + money)*interest / 100;
+	return Account::Deposit(money)*Account::Deposit(GetDepositInterest(this->interest));
+}
+int NormalAccount::GetDepositInterest(int interest) {
+	switch (interest)
+	{
+	case INTEREST_GRADE::A :
+		return Account::GetBalance()*INTEREST_GRADE::A / 100;
+		break;
+	case INTEREST_GRADE::B :
+		return Account::GetBalance()*INTEREST_GRADE::B / 100;
+		break;
+	case INTEREST_GRADE::C:
+		return Account::GetBalance()*INTEREST_GRADE::C / 100;
+		break;
+	}
+}
+void NormalAccount::ShowAllInfo()const {
+	std::cout << "º¸Åë°èÁÂ ÀÔ´Ï´Ù." << std::endl;
+	Account::ShowAllInfo();
 }
 void AccountHandler::DepositAccount()
 {
