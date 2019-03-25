@@ -46,6 +46,12 @@ public:
 	int GetDepositInterest(float interest);
 	void ShowAllInfo()const;
 };
+class HightCreditAccount : public NormalAccount{
+private:
+	int grade;
+public:
+	HightCreditAccount(int number, char *name, double money, float ratio, int grade);
+};
 /*
 	클래스 이름 : AccountHandler
 	클래스 유형 : Control Class

@@ -84,6 +84,7 @@ void NormalAccount::ShowAllInfo()const {
 	std::cout << "보통계좌 입니다." << std::endl;
 	Account::ShowAllInfo();
 }
+HightCreditAccount::HightCreditAccount(int number, char *name, double money, float ratio, int grade) : NormalAccount(number, name, money, ratio), grade(grade) {}
 void AccountHandler::DepositAccount()
 {
 	int temp_number;
