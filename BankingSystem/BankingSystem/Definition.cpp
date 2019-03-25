@@ -59,21 +59,26 @@ NormalAccount::NormalAccount(int number, char *name, double money, float ratio) 
 
 bool NormalAccount::Deposit(double money)
 {
-	return Account::Deposit(money)*Account::Deposit(GetDepositInterest(this->interest));
+	Account::Deposit(money);
+	Account::Deposit(GetDepositInterest(this->interest));
+	return true;
 }
-int NormalAccount::GetDepositInterest(int interest) {
+int NormalAccount::GetDepositInterest(float interest) {
+	return Account::GetBalance()*interest;
+	/*
 	switch (interest)
 	{
-	case INTEREST_GRADE::A :
-		return Account::GetBalance()*INTEREST_GRADE::A / 100;
+	case CREDIT_GRADE::A :
+		return Account::GetBalance()*CREDIT_GRADE::A / 100;
 		break;
-	case INTEREST_GRADE::B :
-		return Account::GetBalance()*INTEREST_GRADE::B / 100;
+	case CREDIT_GRADE::B :
+		return Account::GetBalance()*CREDIT_GRADE::B / 100;
 		break;
-	case INTEREST_GRADE::C:
-		return Account::GetBalance()*INTEREST_GRADE::C / 100;
+	case CREDIT_GRADE::C :
+		return Account::GetBalance()*CREDIT_GRADE::C / 100;
 		break;
 	}
+	*/
 }
 void NormalAccount::ShowAllInfo()const {
 	std::cout << "º¸Åë°èÁÂ ÀÔ´Ï´Ù." << std::endl;
@@ -127,7 +132,7 @@ void AccountHandler::Display() const
 	}
 }
 void AccountHandler::CreateAccount() {
-	int number, balance;
+	int number, balance, type;
 	char name[LEN_NAME];
 	numberOfguest++;
 	std::cout << "Enter your account number." << std::endl;
@@ -138,7 +143,21 @@ void AccountHandler::CreateAccount() {
 
 	std::cout << "Enter your account BALANCE." << std::endl;
 	std::cin >> balance;
-	account[numberOfguest] = new Account(number, name, balance);
+
+	std::cout << "What kind of account do you want?" << std::endl;
+	std::cout << "0-¹«ÀÌÀÚ°èÁÂ, 1->º¸Åë¿¡±Ý°èÁÂ, 2->½Å¿ë½Å·Ú°ÔÁÂ" << std::endl;
+	std::cin >> type;
+	
+	switch (type) {
+	case ACCOUNT_TYPE::ONLY_DEPOSIT:
+		account[numberOfguest] = new Account(number, name, balance);
+		break;
+	case ACCOUNT_TYPE::NORMAL :
+		account[numberOfguest] = new NormalAccount(number, name, balance, 0.3);
+		break;
+	default :
+			break;
+	}
 }
 void AccountHandler::ShowMenu() const
 {
