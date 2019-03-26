@@ -48,9 +48,12 @@ public:
 };
 class HightCreditAccount : public NormalAccount{
 private:
-	int grade;
+	int specialRate;
 public:
 	HightCreditAccount(int number, char *name, double money, float ratio, int grade);
+	bool Deposit(double amount);
+	int GetExtraInterest(float interest);
+	void ShowAllInfo()const;
 };
 /*
 	클래스 이름 : AccountHandler

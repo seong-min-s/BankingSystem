@@ -12,7 +12,6 @@ Account::Account(const Account &copy) :accID(copy.accID), balance(copy.balance) 
 Account::~Account() {
 	delete[]cusName;
 }
-
 bool Account::Deposit(double money)
 {
 	if (money < 0) {
@@ -56,35 +55,34 @@ void Account::ShowAllInfo() const
 
 NormalAccount::NormalAccount(int number, char *name, double money, float ratio) : Account(number, name, money), interest(ratio)
 { }
-
 bool NormalAccount::Deposit(double money)
 {
-	Account::Deposit(money);
-	Account::Deposit(GetDepositInterest(this->interest));
-	return true;
+	return Account::Deposit(money)*Account::Deposit(GetDepositInterest(this->interest));
 }
-int NormalAccount::GetDepositInterest(float interest) {
+int  NormalAccount::GetDepositInterest(float interest)
+{
 	return Account::GetBalance()*interest;
-	/*
-	switch (interest)
-	{
-	case CREDIT_GRADE::A :
-		return Account::GetBalance()*CREDIT_GRADE::A / 100;
-		break;
-	case CREDIT_GRADE::B :
-		return Account::GetBalance()*CREDIT_GRADE::B / 100;
-		break;
-	case CREDIT_GRADE::C :
-		return Account::GetBalance()*CREDIT_GRADE::C / 100;
-		break;
-	}
-	*/
 }
 void NormalAccount::ShowAllInfo()const {
 	std::cout << "보통계좌 입니다." << std::endl;
 	Account::ShowAllInfo();
 }
-HightCreditAccount::HightCreditAccount(int number, char *name, double money, float ratio, int grade) : NormalAccount(number, name, money, ratio), grade(grade) {}
+
+HightCreditAccount::HightCreditAccount(int number, char *name, double money, float ratio, int special) : NormalAccount(number, name, money, ratio), specialRate(special) {}
+bool HightCreditAccount::Deposit(double money)
+{
+	return NormalAccount::Deposit(money)*Account::Deposit(GetExtraInterest(grade / 100.0));
+}
+int HightCreditAccount::GetExtraInterest(float interest)
+{
+	return Account::GetBalance()*interest;
+}
+void HightCreditAccount::ShowAllInfo()const
+{
+	std::cout << "신용계좌" << "_등급 :" << grade <<std::endl;
+	Account::ShowAllInfo();
+}
+
 void AccountHandler::DepositAccount()
 {
 	int temp_number;
@@ -133,8 +131,9 @@ void AccountHandler::Display() const
 	}
 }
 void AccountHandler::CreateAccount() {
-	int number, balance, type;
+	int number, balance, type, grade;
 	char name[LEN_NAME];
+	float interest;
 	numberOfguest++;
 	std::cout << "Enter your account number." << std::endl;
 	std::cin >> number;
@@ -154,7 +153,16 @@ void AccountHandler::CreateAccount() {
 		account[numberOfguest] = new Account(number, name, balance);
 		break;
 	case ACCOUNT_TYPE::NORMAL :
-		account[numberOfguest] = new NormalAccount(number, name, balance, 0.3);
+		std::cout << "이자율";
+		std::cin >> interest;
+		account[numberOfguest] = new NormalAccount(number, name, balance, interest);
+		break;
+	case ACCOUNT_TYPE::HIGHCREDIT :
+		std::cout << "이자율 : ";
+		std::cin >> interest;
+		std::cout << "신용등급 : ";
+		std::cin >> grade;
+		account[numberOfguest] = new HightCreditAccount(number, name, balance, interest,grade);
 		break;
 	default :
 			break;
