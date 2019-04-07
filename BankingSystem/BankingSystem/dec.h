@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <cstring>
+#include "Account.h"
 enum { CREATE = 1, DEPOSIT, WITHDRAW, DISPLAY, EXIT };
 namespace CREDIT_GRADE{
 	enum {
@@ -16,27 +17,7 @@ namespace ACCOUNT_TYPE {
 		HIGHCREDIT = 2
 	};
 }
-/*
-	클래스 이름 : Account
-	클래스 유형 : Entity Class
-*/
-class Account {
-private:
-	int accID;
-	char *cusName;
-	double balance;
-public :
-	Account(int number, char *name, double money);
-	Account(const Account &copy);
-	~Account();
-	//virtual bool SetBalance(int COMMAND, double amount);
-	virtual bool Deposit(double money);
-	bool Withdraw(double money);
-	int GetNumber()const;
-	char* GetName()const;
-	double GetBalance()const;
-	virtual void ShowAllInfo()const;
-};
+
 class NormalAccount : public Account {
 private:
 	float interest;

@@ -1,4 +1,5 @@
 #include "Account.h"
+int AccountHandler::numberOfguest = -1;
 Account::Account(int number, char *name, double money) : accID(number), balance(money) {
 	this->cusName = new char[strlen(name) + 1];//문제요구사항 : 멤버변수로 문자열 포인터를 지니고, 동적 할당의 형태로 구현해야 한다.
 	strcpy(this->cusName, name);
@@ -10,19 +11,28 @@ Account::Account(const Account &copy) : accID(copy.accID), balance(copy.balance)
 Account::~Account() {
 	delete[]cusName;
 }
-bool Account::SetBalance(int COMMAND, double amount)
+
+bool Account::Deposit(double money)
 {
-	if (amount < 0) {
+	if (money < 0) {
+		std::cout << "Not Accurate Money" << std::endl;
 		return false;
 	}
-	if (COMMAND == DEPOSIT)
-	{
-		this->balance += amount;
+	else {
+		this->balance += money;
+		return true;
 	}
-	else if (COMMAND == WITHDRAW) {
-		this->balance -= amount;
+}
+bool Account::Withdraw(double money)
+{
+	if (money < 0) {
+		std::cout << "There's no money left in your Account" << std::endl;
+		return false;
 	}
-	return true;
+	else {
+		this->balance -= money;
+		return true;
+	}
 }
 int Account::GetNumber() const
 {
