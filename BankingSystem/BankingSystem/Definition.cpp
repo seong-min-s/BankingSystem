@@ -68,10 +68,10 @@ void NormalAccount::ShowAllInfo()const {
 	Account::ShowAllInfo();
 }
 
-HightCreditAccount::HightCreditAccount(int number, char *name, double money, float ratio, int special) : NormalAccount(number, name, money, ratio), specialRate(special) {}
+HightCreditAccount::HightCreditAccount(int number, char *name, double money, float ratio, int grade) : NormalAccount(number, name, money, ratio), specialRate(grade) {}
 bool HightCreditAccount::Deposit(double money)
 {
-	return NormalAccount::Deposit(money)*Account::Deposit(GetExtraInterest(grade / 100.0));
+	return NormalAccount::Deposit(money)*Account::Deposit(GetExtraInterest(specialRate / 100.0));
 }
 int HightCreditAccount::GetExtraInterest(float interest)
 {
@@ -79,7 +79,7 @@ int HightCreditAccount::GetExtraInterest(float interest)
 }
 void HightCreditAccount::ShowAllInfo()const
 {
-	std::cout << "신용계좌" << "_등급 :" << grade <<std::endl;
+	std::cout << "신용계좌" << "_등급 :" << specialRate <<std::endl;
 	Account::ShowAllInfo();
 }
 
