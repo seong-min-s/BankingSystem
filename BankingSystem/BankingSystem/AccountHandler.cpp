@@ -1,7 +1,6 @@
 #include "BankingSystem.h"//함수 또는 변수정의
 #include "AccountHandler.h"
-int AccountHandler::numberOfguest = -1;
-
+AccountHandler::AccountHandler() :numberOfguest(0) {}
 void AccountHandler::DepositAccount()
 {
 	int temp_number;
@@ -31,7 +30,7 @@ void AccountHandler::WithdrawMoney()
 	std::cin >> temp_number;
 	std::cout << "출금 액 :" << std::endl;
 	std::cin >> temp_money;
-	for (int i = 0; i <= numberOfguest; i++)
+	for (int i = 0; i < numberOfguest; i++)
 	{
 		if (account[i]->GetNumber() == temp_number)
 		{
@@ -43,7 +42,7 @@ void AccountHandler::WithdrawMoney()
 }
 void AccountHandler::Display() const
 {
-	for (int i = 0; i <= numberOfguest; i++)
+	for (int i = 0; i < numberOfguest; i++)
 	{
 		account[i]->ShowAllInfo();
 		std::cout << std::endl;
@@ -53,7 +52,7 @@ void AccountHandler::CreateAccount() {
 	int number, balance, type, grade;
 	char name[LEN_NAME];
 	float interest;
-	numberOfguest++;
+	
 	std::cout << "Enter your account number." << std::endl;
 	std::cin >> number;
 
@@ -69,19 +68,19 @@ void AccountHandler::CreateAccount() {
 	
 	switch (type) {
 	case ACCOUNT_TYPE::ONLY_DEPOSIT:
-		account[numberOfguest] = new Account(number, name, balance);
+		account[numberOfguest++] = new Account(number, name, balance);
 		break;
 	case ACCOUNT_TYPE::NORMAL :
 		std::cout << "이자율";
 		std::cin >> interest;
-		account[numberOfguest] = new NormalAccount(number, name, balance, interest);
+		account[numberOfguest++] = new NormalAccount(number, name, balance, interest);
 		break;
 	case ACCOUNT_TYPE::HIGHCREDIT :
 		std::cout << "이자율 : ";
 		std::cin >> interest;
 		std::cout << "신용등급 : ";
 		std::cin >> grade;
-		account[numberOfguest] = new HightCreditAccount(number, name, balance, interest,grade);
+		account[numberOfguest++] = new HightCreditAccount(number, name, balance, interest,grade);
 		break;
 	default :
 			break;

@@ -1,14 +1,16 @@
-#pragma once
 /*
 	클래스 이름 : AccountHandler
 	클래스 유형 : Control Class
 */
-#include "BankingSystem.h"
+#ifndef _ACCOUNTHANDLER_H
+#define _ACCOUNTHANDLER_H
+
+#include "Account.h"
 class AccountHandler {
 public:
-	const static int LEN_NAME = 20;
-	static int numberOfguest;
+	int numberOfguest;
 	Account *account[100];
+	AccountHandler();
 	~AccountHandler();
 public:
 	void ShowMenu() const;      //메뉴 출력
@@ -17,4 +19,5 @@ public:
 	void WithdrawMoney(); //출     금
 	void Display() const;		  //잔액 조회
 };
+#endif
 
