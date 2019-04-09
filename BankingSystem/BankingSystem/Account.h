@@ -12,13 +12,17 @@ private:
 public:
 	Account(int number, char *name, double money);
 	Account(const Account &copy);
-	
+	Account& operator=(const Account& copy);
+
 	virtual bool Deposit(double money);
 	bool Withdraw(double money);
+
 	int GetNumber()const;
 	char* GetName()const;
 	double GetBalance()const;
+
 	virtual void ShowAllInfo()const;
+
 	~Account();
 };
 #endif

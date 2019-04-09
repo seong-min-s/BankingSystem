@@ -8,8 +8,16 @@ Account::Account(const Account &copy) : accID(copy.accID), balance(copy.balance)
 	this->cusName = new char[strlen(copy.cusName) + 1];
 	strcpy(cusName, copy.cusName);
 }
+Account& Account::operator=(const Account& copy) {
+	delete []this->cusName;
+	this->cusName = new char[strlen(copy.cusName) + 1];
+	strcpy(cusName, copy.cusName);
+	this->accID = copy.accID;
+	this->balance = copy.balance;
+	return *this;
+}
 Account::~Account() {
-	delete[]cusName;
+	delete []cusName;
 }
 
 bool Account::Deposit(double money)
