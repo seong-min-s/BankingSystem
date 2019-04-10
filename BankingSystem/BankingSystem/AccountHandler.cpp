@@ -13,9 +13,9 @@ void AccountHandler::DepositAccount()
 	//계좌를 찾고 넣자
 	for (int i = 0; i <= numberOfguest; i++)
 	{
-		if (account[i]->GetNumber()== temp_number)
+		if (acc_arr[i]->GetNumber()== temp_number)
 		{
-			account[i]->Deposit(temp_money);
+			acc_arr[i]->Deposit(temp_money);
 			std::cout << "입금 완료" << std::endl;
 			break;
 		}
@@ -32,9 +32,9 @@ void AccountHandler::WithdrawMoney()
 	std::cin >> temp_money;
 	for (int i = 0; i < numberOfguest; i++)
 	{
-		if (account[i]->GetNumber() == temp_number)
+		if (acc_arr[i]->GetNumber() == temp_number)
 		{
-			account[i]->Withdraw(temp_money);
+			acc_arr[i]->Withdraw(temp_money);
 			std::cout << "출금 완료" << std::endl;
 			break;
 		}
@@ -44,7 +44,7 @@ void AccountHandler::Display() const
 {
 	for (int i = 0; i < numberOfguest; i++)
 	{
-		account[i]->ShowAllInfo();
+		acc_arr[i]->ShowAllInfo();
 		std::cout << std::endl;
 	}
 }
@@ -68,19 +68,20 @@ void AccountHandler::CreateAccount() {
 	
 	switch (type) {
 	case ACCOUNT_TYPE::ONLY_DEPOSIT:
-		account[numberOfguest++] = new Account(number, name, balance);
+		//account[numberOfguest++] = new Account(number, name, balance);
+		acc_arr[numberOfguest++] = new Account(number, name, balance);
 		break;
 	case ACCOUNT_TYPE::NORMAL :
 		std::cout << "이자율";
 		std::cin >> interest;
-		account[numberOfguest++] = new NormalAccount(number, name, balance, interest);
+		acc_arr[numberOfguest++] = new NormalAccount(number, name, balance, interest);
 		break;
 	case ACCOUNT_TYPE::HIGHCREDIT :
 		std::cout << "이자율 : ";
 		std::cin >> interest;
 		std::cout << "신용등급 : ";
 		std::cin >> grade;
-		account[numberOfguest++] = new HightCreditAccount(number, name, balance, interest,grade);
+		acc_arr[numberOfguest++] = new HightCreditAccount(number, name, balance, interest,grade);
 		break;
 	default :
 			break;
@@ -97,6 +98,6 @@ void AccountHandler::ShowMenu() const
 }
 AccountHandler::~AccountHandler() {
 	for (int i = 0; i < AccountHandler::numberOfguest; i++) {
-		delete[i]account;
+		delete acc_arr[i];
 	}
 }

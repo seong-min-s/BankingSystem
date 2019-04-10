@@ -10,6 +10,7 @@ private:
 	char *cusName;
 	double balance;
 public:
+	Account();
 	Account(int number, char *name, double money);
 	Account(const Account &copy);
 	Account& operator=(const Account& copy);

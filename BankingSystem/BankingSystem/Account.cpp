@@ -1,5 +1,6 @@
 #include "BankingSystem.h"
 #include "Account.h"
+Account::Account() {};
 Account::Account(int number, char *name, double money) : accID(number), balance(money) {
 	this->cusName = new char[strlen(name) + 1];//문제요구사항 : 멤버변수로 문자열 포인터를 지니고, 동적 할당의 형태로 구현해야 한다.
 	strcpy(this->cusName, name);
