@@ -1,11 +1,12 @@
 #ifndef _NORMAL_H
 #define _NORMAL_H
 #include "Account.h"
+#include "mystring.h"
 class NormalAccount : public Account {
 private:
 	float interest;
 public:
-	NormalAccount(int number, char *name, double money, float ratio) : Account(number, name, money), interest(ratio) {};
+	NormalAccount(int number,mystring name, double money, float ratio) : Account(number, name, money), interest(ratio) {};
 	bool Deposit(double amount)
 	{
 		return Account::Deposit(amount)*Account::Deposit(GetDepositInterest(this->interest));

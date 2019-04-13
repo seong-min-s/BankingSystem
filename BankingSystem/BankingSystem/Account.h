@@ -4,14 +4,15 @@
 */
 #ifndef _ACCOUNT_H
 #define _ACCOUNT_H
+#include "mystring.h"
 class Account {
 private:
 	int accID;
-	char *cusName;
+	mystring cusName;
 	double balance;
 public:
-	Account();
-	Account(int number, char *name, double money);
+	Account() :accID(0), balance(0) { cusName = "null"; };
+	Account(int number, mystring name, double money);
 	Account(const Account &copy);
 	Account& operator=(const Account& copy);
 
@@ -19,7 +20,7 @@ public:
 	bool Withdraw(double money);
 
 	int GetNumber()const;
-	char* GetName()const;
+	mystring GetName()const;
 	double GetBalance()const;
 
 	virtual void ShowAllInfo()const;

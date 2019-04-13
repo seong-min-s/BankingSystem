@@ -1,24 +1,19 @@
-#include "BankingSystem.h"
 #include "Account.h"
-Account::Account() {};
-Account::Account(int number, char *name, double money) : accID(number), balance(money) {
-	this->cusName = new char[strlen(name) + 1];//문제요구사항 : 멤버변수로 문자열 포인터를 지니고, 동적 할당의 형태로 구현해야 한다.
-	strcpy(this->cusName, name);
+
+Account::Account(int number, mystring name, double money) : accID(number), balance(money) {
+	cusName = name;
 }
 Account::Account(const Account &copy) : accID(copy.accID), balance(copy.balance) {
-	this->cusName = new char[strlen(copy.cusName) + 1];
-	strcpy(cusName, copy.cusName);
+	cusName = copy.cusName;
 }
 Account& Account::operator=(const Account& copy) {
-	delete []this->cusName;
-	this->cusName = new char[strlen(copy.cusName) + 1];
-	strcpy(cusName, copy.cusName);
+	cusName = copy.cusName;
 	this->accID = copy.accID;
 	this->balance = copy.balance;
 	return *this;
 }
 Account::~Account() {
-	delete []cusName;
+	
 }
 
 bool Account::Deposit(double money)
@@ -47,7 +42,7 @@ int Account::GetNumber() const
 {
 	return accID;
 }
-char* Account::GetName() const//이름을 얻는 과정에서 오류발생
+mystring Account::GetName() const//이름을 얻는 과정에서 오류발생
 {
 	return this->cusName;
 }
