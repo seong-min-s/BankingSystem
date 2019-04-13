@@ -1,5 +1,4 @@
 #include "mystring.h"
-#include "cstring"
 mystring::mystring(const mystring& copy) :len(copy.len)
 {
 	str = new char[strlen(copy.str) + 1];
@@ -22,44 +21,33 @@ mystring& mystring::operator=(const mystring& copy)
 	{
 		delete[]str;
 	}
-	len = strlen(copy.str) + 1;
+	len = copy.len;
 	str = new char[len];
 	strcpy(str, copy.str);
 	return *this;
 }
 mystring mystring::operator+=(const mystring& tmp)
 {
-	
 	len = len + tmp.len - 1;
-	char *newStr;
-	newStr = new char[len];
-	if (str != NULL) {
-		strcpy(newStr, str);
-		delete[]str;
-	}
+	char *newStr = new char[len];
+	strcpy(newStr, str);
 	strcat(newStr, tmp.str);
 
-	str = new char[len];
-	strcpy(str, newStr);
-
-	delete[]newStr;
-
+	if (str != NULL) {
+		delete[]str;
+	}
+	str = newStr;
 	return *this;
 }
 
 bool mystring::operator== (const mystring& ref)
 {
-	if (strcmp(str, ref.str) == 0) {
-		return true;
-	}
-	else {
-		return false;
-	}
+	return strcmp(str, ref.str)? false :true;
 }
 
 ostream& operator<<(ostream& os, const mystring& ref)
 {
-	os << ref.str << endl;
+	os << ref.str;
 	return os;
 }
 istream& operator>>(istream& is, mystring& getstr)

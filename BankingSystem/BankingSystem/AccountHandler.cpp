@@ -1,5 +1,8 @@
 #include "BankingSystem.h"//함수 또는 변수정의
 #include "AccountHandler.h"
+#include "Account.h"
+#include "HightCreditAccount.h"
+#include "NormalAccount.h"
 AccountHandler::AccountHandler() :numberOfguest(0) {}
 void AccountHandler::DepositAccount()
 {
