@@ -9,14 +9,13 @@ public:
 	mystring() :len(0) { str = NULL; }
 	mystring(const mystring& s);
 	mystring(const char* s);
-
-	int getLength();
-
-	mystring& operator=(const mystring& s);
-	mystring operator+=(const mystring& s);
-
-	bool operator==(const mystring& );
 	~mystring();
+	int getLength();
+	mystring& operator=(const mystring& s);
+	mystring& operator+=(const mystring& s);
+	mystring operator+(const mystring& s);
+	bool operator==(const mystring& );
+
 	friend ostream& operator<<(ostream& os, const mystring& s);
 	friend istream& operator>>(istream& is, mystring&);
 };

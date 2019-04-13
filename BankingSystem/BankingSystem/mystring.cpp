@@ -26,7 +26,17 @@ mystring& mystring::operator=(const mystring& copy)
 	strcpy(str, copy.str);
 	return *this;
 }
-mystring mystring::operator+=(const mystring& tmp)
+mystring mystring::operator+(const mystring& s)
+{
+	char *newstr = new char[len + s.len - 1];
+	strcpy(newstr, str);
+	strcat(newstr, s.str);
+
+	mystring temp = newstr;
+	delete[]newstr;
+	return temp;
+}
+mystring& mystring::operator+=(const mystring& tmp)
 {
 	len = len + tmp.len - 1;
 	char *newStr = new char[len];
