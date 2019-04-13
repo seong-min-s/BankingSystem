@@ -69,3 +69,8 @@ istream& operator>>(istream& is, mystring& getstr)
 	getstr = tmp;
 	return is;
 }
+mystring::~mystring()
+{
+	if (str != NULL)
+		delete[]str;
+}

@@ -11,7 +11,7 @@ void AccountHandler::DepositAccount()
 	std::cout << "입금 금액 :" << std::endl;
 	std::cin >> temp_money;
 	//계좌를 찾고 넣자
-	for (int i = 0; i <= numberOfguest; i++)
+	for (int i = 0; i < numberOfguest; i++)
 	{
 		if (acc_arr[i]->GetNumber()== temp_number)
 		{
@@ -25,7 +25,7 @@ void AccountHandler::WithdrawMoney()
 {
 	int temp_number;
 	double temp_money;
-	std::cout << "입     금" << std::endl;
+	std::cout << "출     금" << std::endl;
 	std::cout << "계좌 ID :" << std::endl;
 	std::cin >> temp_number;
 	std::cout << "출금 액 :" << std::endl;
