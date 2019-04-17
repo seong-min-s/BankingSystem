@@ -3,7 +3,7 @@
 #include"BankingSystem.h"
 template <typename T>
 class BoundCheckArray {
-prvate:
+private:
 	int len;
 	T *arr;
 	BoundCheckArray(const BoundCheckArray &copy)
@@ -11,6 +11,7 @@ prvate:
 	BoundCheckArray& operator=(const BoundCheckArray &ref)
 	{};
 public:
+	BoundCheckArray();
 	BoundCheckArray(int n);
 	T& operator[] (int idx);
 	T operator[] (int idx) const;
@@ -18,7 +19,11 @@ public:
 	int GetLength() const;
 	~BoundCheckArray();
 };
-
+template <typename T>
+BoundCheckArray<T>::BoundCheckArray()
+{
+	arr = new T[LEN_NAME];
+}
 template <typename T>
 BoundCheckArray<T>::BoundCheckArray(int n) : len(n)
 {
@@ -28,7 +33,7 @@ template <typename T>
 T& BoundCheckArray<T>::operator[] (int idx)
 {
 	if (idx < 0 && idx >= LEN_NAME) {
-		fprintf(ferror, "index error\n");
+		fprintf(stderr, "index error\n");
 		exit(1);
 	}
 	return arr[idx];

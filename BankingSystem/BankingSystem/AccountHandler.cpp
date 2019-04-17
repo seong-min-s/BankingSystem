@@ -3,7 +3,9 @@
 #include "Account.h"
 #include "HightCreditAccount.h"
 #include "NormalAccount.h"
+
 AccountHandler::AccountHandler() :numberOfguest(0) {}
+
 void AccountHandler::DepositAccount()
 {
 	int temp_number;
