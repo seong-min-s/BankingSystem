@@ -150,6 +150,7 @@
     <ClInclude Include="AccountArray.h" />
     <ClInclude Include="AccountHandler.h" />
     <ClInclude Include="BankingSystem.h" />
+    <ClInclude Include="BoundCheckArray.h" />
     <ClInclude Include="HightCreditAccount.h" />
     <ClInclude Include="mystring.h" />
     <ClInclude Include="NormalAccount.h" />
