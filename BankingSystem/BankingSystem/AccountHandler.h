@@ -5,7 +5,6 @@
 #ifndef _ACCOUNTHANDLER_H
 #define _ACCOUNTHANDLER_H
 #include "Account.h"
-#include "AccountArray.h"
 #include "BoundCheckArray.h"
 typedef Account* Account_ptr;
 class AccountHandler {
