@@ -5,12 +5,14 @@
 #ifndef _ACCOUNTHANDLER_H
 #define _ACCOUNTHANDLER_H
 #include "Account.h"
-#include "AccountArray.h"
+#include "BoundCheckArray.h"
+typedef Account* Account_ptr;
 class AccountHandler {
 public:
 	int numberOfguest;
 	//Account *account[100];
-	AccountArray acc_arr;
+	//AccountArray acc_arr;
+	BoundCheckArray<Account_ptr> acc_arr;
 	AccountHandler();
 	~AccountHandler();
 public:
