@@ -3,18 +3,31 @@
 #include "Account.h"
 #include "HightCreditAccount.h"
 #include "NormalAccount.h"
-
+#include "AccountException.h"
 AccountHandler::AccountHandler() :numberOfguest(0) {}
 
-void AccountHandler::DepositAccount()
+void AccountHandler::DepositAccount() throw (DepositException)
 {
 	int temp_number;
 	double temp_money;
 	std::cout << "입     금" << std::endl;
 	std::cout << "계좌 번호 :(이름 아님)" << std::endl;
 	std::cin >> temp_number;
-	std::cout << "입금 금액 :" << std::endl;
-	std::cin >> temp_money;
+	while(1){
+		try {
+			std::cout << "입금 금액 :" << std::endl;
+			std::cin >> temp_money;
+			if (temp_money < 0) {
+				DepositException dex(temp_money);
+				throw dex;
+			}
+			else
+				break;
+		}
+		catch (DepositException &dexpr) {
+			dexpr.What();
+		}
+	}
 	//계좌를 찾고 넣자
 	for (int i = 0; i < numberOfguest; i++)
 	{
@@ -26,24 +39,40 @@ void AccountHandler::DepositAccount()
 		}
 	}
 }
-void AccountHandler::WithdrawMoney()
+void AccountHandler::WithdrawMoney() throw (WithdrawException)
 {
 	int temp_number;
+	int i;
 	double temp_money;
+	double default_balance;
 	std::cout << "출     금" << std::endl;
 	std::cout << "계좌 ID :" << std::endl;
 	std::cin >> temp_number;
-	std::cout << "출금 액 :" << std::endl;
-	std::cin >> temp_money;
-	for (int i = 0; i < numberOfguest; i++)
+	for (i = 0; i < numberOfguest; i++)
 	{
 		if (acc_arr[i]->GetNumber() == temp_number)
 		{
-			acc_arr[i]->Withdraw(temp_money);
-			std::cout << "출금 완료" << std::endl;
+			default_balance = acc_arr[i]->GetBalance();
 			break;
 		}
 	}
+	while (1) {
+		try {
+			std::cout << "출금 액 :" << std::endl;
+			std::cin >> temp_money;
+			if (temp_money > default_balance) {
+				throw WithdrawException(temp_money);
+			}
+			else {
+				break;
+			}
+		}
+		catch (AccountException &wexpr) {
+			wexpr.What();
+		}
+	}
+	acc_arr[numberOfguest-1]->Withdraw(temp_money);
+	std::cout << "출금 완료" << std::endl;
 }
 void AccountHandler::Display() const
 {

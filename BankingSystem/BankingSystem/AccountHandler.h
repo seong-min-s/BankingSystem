@@ -6,6 +6,7 @@
 #define _ACCOUNTHANDLER_H
 #include "Account.h"
 #include "BoundCheckArray.h"
+#include"AccountException.h"
 typedef Account* Account_ptr;
 class AccountHandler {
 public:
@@ -18,7 +19,7 @@ public:
 public:
 	void ShowMenu() const;      //메뉴 출력
 	void CreateAccount(); //계좌 개설
-	void DepositAccount();//입     금
+	void DepositAccount()throw (DepositException);//입     금
 	void WithdrawMoney(); //출     금
 	void Display() const;		  //잔액 조회
 };
