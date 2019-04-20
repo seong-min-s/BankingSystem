@@ -1,4 +1,5 @@
 #include "Account.h"
+#include "AccountException.h"
 
 Account::Account(int number, mystring name, double money) : accID(number), balance(money) {
 	cusName = name;
@@ -16,26 +17,24 @@ Account::~Account() {
 	
 }
 
-bool Account::Deposit(double money)
+void Account::Deposit(double money)
 {
 	if (money < 0) {
-		std::cout << "Not Accurate Money" << std::endl;
-		return false;
+		throw MinusException(money);
 	}
 	else {
 		this->balance += money;
-		return true;
 	}
 }
-bool Account::Withdraw(double money)
+void Account::Withdraw(double money)
 {
 	if (money < 0) {
-		std::cout << "There's no money left in your Account" << std::endl;
-		return false;
+		throw MinusException(money);
 	}
-	else {
+	else if(money >this->balance){
+		throw WithdrawException(money);
+	}else{
 		this->balance -= money;
-		return true;
 	}
 }
 int Account::GetNumber() const

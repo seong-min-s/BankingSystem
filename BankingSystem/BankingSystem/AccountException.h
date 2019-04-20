@@ -9,12 +9,12 @@ public:
 	virtual void What() = 0;
 };
 
-class DepositException : public AccountException
+class MinusException : public AccountException
 {
 private:
 	double balance;
 public:
-	DepositException(int m):balance(m){}
+	MinusException(int m):balance(m){}
 	void What()
 	{
 		cout << "입력된 금액 : " << balance << "<0보다 작은 금액>" << endl;

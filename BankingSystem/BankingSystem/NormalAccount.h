@@ -7,9 +7,10 @@ private:
 	float interest;
 public:
 	NormalAccount(int number,mystring name, double money, float ratio) : Account(number, name, money), interest(ratio) {};
-	bool Deposit(double amount)
+	void Deposit(double amount)
 	{
-		return Account::Deposit(amount)*Account::Deposit(GetDepositInterest(this->interest));
+		Account::Deposit(amount);
+		Account::Deposit(GetDepositInterest(this->interest));
 	}
 	int GetDepositInterest(float interest)
 	{

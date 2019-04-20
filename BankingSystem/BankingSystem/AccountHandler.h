@@ -19,7 +19,7 @@ public:
 public:
 	void ShowMenu() const;      //메뉴 출력
 	void CreateAccount(); //계좌 개설
-	void DepositAccount()throw (DepositException);//입     금
+	void DepositAccount()throw (MinusException);//입     금
 	void WithdrawMoney(); //출     금
 	void Display() const;		  //잔액 조회
 };

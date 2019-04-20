@@ -6,40 +6,35 @@
 #include "AccountException.h"
 AccountHandler::AccountHandler() :numberOfguest(0) {}
 
-void AccountHandler::DepositAccount() throw (DepositException)
+void AccountHandler::DepositAccount() throw (MinusException)
 {
 	int temp_number;
 	double temp_money;
 	std::cout << "입     금" << std::endl;
 	std::cout << "계좌 번호 :(이름 아님)" << std::endl;
 	std::cin >> temp_number;
-	while(1){
+	while(true){
 		try {
 			std::cout << "입금 금액 :" << std::endl;
 			std::cin >> temp_money;
-			if (temp_money < 0) {
-				DepositException dex(temp_money);
-				throw dex;
+			//계좌를 찾고 넣자
+			for (int i = 0; i < numberOfguest; i++)
+			{
+				if (acc_arr[i]->GetNumber() == temp_number)
+				{
+					acc_arr[i]->Deposit(temp_money);
+					std::cout << "입금 완료" << std::endl;
+					break;
+				}
 			}
-			else
-				break;
+			break;
 		}
-		catch (DepositException &dexpr) {
+		catch (MinusException &dexpr) {
 			dexpr.What();
 		}
 	}
-	//계좌를 찾고 넣자
-	for (int i = 0; i < numberOfguest; i++)
-	{
-		if (acc_arr[i]->GetNumber()== temp_number)
-		{
-			acc_arr[i]->Deposit(temp_money);
-			std::cout << "입금 완료" << std::endl;
-			break;
-		}
-	}
 }
-void AccountHandler::WithdrawMoney() throw (WithdrawException)
+void AccountHandler::WithdrawMoney() throw (MinusException,WithdrawException)
 {
 	int temp_number;
 	int i;
@@ -48,31 +43,28 @@ void AccountHandler::WithdrawMoney() throw (WithdrawException)
 	std::cout << "출     금" << std::endl;
 	std::cout << "계좌 ID :" << std::endl;
 	std::cin >> temp_number;
-	for (i = 0; i < numberOfguest; i++)
-	{
-		if (acc_arr[i]->GetNumber() == temp_number)
-		{
-			default_balance = acc_arr[i]->GetBalance();
+
+	while (true) {
+		try {
+			for (i = 0; i < numberOfguest; i++)
+			{
+				if (acc_arr[i]->GetNumber() == temp_number)
+				{
+					std::cout << "출금 액 :" << std::endl;
+					std::cin >> temp_money;
+					acc_arr[i]->Withdraw(temp_money);
+					std::cout << "출금 완료" << std::endl;
+					break;
+				}
+			}
 			break;
 		}
-	}
-	while (1) {
-		try {
-			std::cout << "출금 액 :" << std::endl;
-			std::cin >> temp_money;
-			if (temp_money > default_balance) {
-				throw WithdrawException(temp_money);
-			}
-			else {
-				break;
-			}
-		}
-		catch (AccountException &wexpr) {
+		catch (MinusException & mexpr) {
+			mexpr.What();
+		}catch (WithdrawException &wexpr) {
 			wexpr.What();
 		}
 	}
-	acc_arr[numberOfguest-1]->Withdraw(temp_money);
-	std::cout << "출금 완료" << std::endl;
 }
 void AccountHandler::Display() const
 {
